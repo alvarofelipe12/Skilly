@@ -1,1 +1,5 @@
-<p>user works!</p>
+<ng-container *ngIf="bioResponse | async">
+  <img [src]="bioResponse.person.picture" alt="">
+
+</ng-container>
+

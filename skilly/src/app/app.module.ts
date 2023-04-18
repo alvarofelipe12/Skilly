@@ -6,19 +6,19 @@ import { AppComponent } from './app.component';
 import { DetailsComponent } from './details/details.component';
 import { UserComponent } from './user/user.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { InterceptorService } from './services/interceptor.service';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DetailsComponent,
-    UserComponent
+  declarations: [AppComponent, DetailsComponent, UserComponent],
+  imports: [BrowserModule, AppRoutingModule, NgbModule, HttpClientModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: InterceptorService,
+      multi: true,
+    },
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    NgbModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
