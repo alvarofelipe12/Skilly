@@ -7,9 +7,10 @@
       </div>
       <div class="col">
         <ng-container *ngIf="masterSkillsExists">
-          <p class="proficiency">Master</p>
+          <p class="proficiency"><i class="bi bi-reception-4"></i> Master</p>
           <ng-container *ngFor="let skill of bioResponse.strengths">
-            <div class="col bullet" *ngIf="skill.proficiency === 'master'">
+            <div (click)="navigateToDetails()" class="col bullet" *ngIf="skill.proficiency === 'master'" ngbPopover="{{skill.recommendationsMessage}}"
+              triggers="mouseenter:mouseleave" popoverTitle="{{firstName}} is skilled in {{skill.name}}" popoverClass="popover-class">
               <p class="skill">
                 {{skill.name}}
               </p>
@@ -17,9 +18,10 @@
           </ng-container>
         </ng-container>
         <ng-container *ngIf="expertSkillsExists">
-          <p class="proficiency">Expert</p>
+          <p class="proficiency"><i class="bi bi-reception-3"></i> Expert</p>
           <ng-container *ngFor="let skill of bioResponse.strengths">
-            <div class="col bullet" *ngIf="skill.proficiency === 'expert'">
+            <div (click)="navigateToDetails()" class="col bullet" *ngIf="skill.proficiency === 'expert'" ngbPopover="{{skill.recommendationsMessage}}"
+              triggers="mouseenter:mouseleave" popoverTitle="{{firstName}} is skilled in {{skill.name}}" popoverClass="popover-class">
               <p class="skill">
                 {{skill.name}}
               </p>
@@ -27,9 +29,10 @@
           </ng-container>
         </ng-container>
         <ng-container *ngIf="proficientSkillsExists">
-          <p class="proficiency">Proficient</p>
+          <p class="proficiency"><i class="bi bi-reception-2"></i> Proficient</p>
           <ng-container *ngFor="let skill of bioResponse.strengths">
-            <div class="col bullet" *ngIf="skill.proficiency === 'proficient'">
+            <div (click)="navigateToDetails()" class="col bullet" *ngIf="skill.proficiency === 'proficient'" ngbPopover="{{skill.recommendationsMessage}}"
+              triggers="mouseenter:mouseleave" popoverTitle="{{firstName}} is skilled in {{skill.name}}" popoverClass="popover-class">
               <p class="skill">
                 {{skill.name}}
               </p>
@@ -37,9 +40,10 @@
           </ng-container>
         </ng-container>
         <ng-container *ngIf="noviceSkillsExists">
-          <p class="proficiency">Beginner</p>
+          <p class="proficiency"><i class="bi bi-reception-1"></i> Beginner</p>
           <ng-container *ngFor="let skill of bioResponse.strengths">
-            <div class="col bullet" *ngIf="skill.proficiency === 'novice'">
+            <div (click)="navigateToDetails()" class="col bullet" *ngIf="skill.proficiency === 'novice'" ngbPopover="{{skill.recommendationsMessage}}"
+              triggers="mouseenter:mouseleave" popoverTitle="{{firstName}} is skilled in {{skill.name}}" popoverClass="popover-class">
               <p class="skill">
                 {{skill.name}}
               </p>
@@ -47,9 +51,10 @@
           </ng-container>
         </ng-container>
         <ng-container *ngIf="noExpSkillsExists">
-          <p class="proficiency">No experience, but interested</p>
+          <p class="proficiency"><i class="bi bi-reception-0"></i> No experience, but interested</p>
           <ng-container *ngFor="let skill of bioResponse.strengths">
-            <div class="col bullet" *ngIf="skill.proficiency === 'no-experience-interested'">
+            <div (click)="navigateToDetails()" class="col bullet" *ngIf="skill.proficiency === 'no-experience-interested'" ngbPopover="{{skill.recommendationsMessage}}"
+              triggers="mouseenter:mouseleave" popoverTitle="{{firstName}} is skilled in {{skill.name}}" popoverClass="popover-class">
               <p class="skill">
                 {{skill.name}}
               </p>
@@ -57,9 +62,10 @@
           </ng-container>
         </ng-container>
         <ng-container *ngIf="unknownSkillsExists">
-          <p class="proficiency">Unknown</p>
+          <p class="proficiency"><i class="bi bi-bell-slash"></i> Unknown</p>
           <ng-container *ngFor="let skill of bioResponse.strengths">
-            <div class="col bullet" *ngIf="skill.proficiency === 'unknown'">
+            <div (click)="navigateToDetails()" class="col bullet" *ngIf="skill.proficiency === 'unknown'" ngbPopover="{{skill.recommendationsMessage}}"
+              triggers="mouseenter:mouseleave" popoverTitle="{{firstName}} is skilled in {{skill.name}}" popoverClass="popover-class">
               <p class="skill">
                 {{skill.name}}
               </p>

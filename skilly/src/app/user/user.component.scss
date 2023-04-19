@@ -1,6 +1,8 @@
 .container {
   img.img-resize {
     width: 300px;
+    border-radius: 10%;
+    margin-top: 1rem;
   }
   .bullet {
     height: 32px;
@@ -16,9 +18,11 @@
     color: rgba(255, 255, 255, 0.9);
     margin-top: 8px !important;
     margin-right: 8px !important;
+    cursor: pointer;
   }
   .proficiency {
     margin-top: 1rem;
     margin-bottom: 0px;
+    color: rgba(255,255,255,.65);
   }
 }

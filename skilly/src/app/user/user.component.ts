@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { BiosService } from '../services/bios.service';
-import { Observable, Subject, takeUntil } from 'rxjs';
+import { Subject, takeUntil } from 'rxjs';
 import { Bios, Strength } from '../interfaces/bios';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'app-user',
@@ -20,7 +21,9 @@ export class UserComponent {
   public noExpSkillsExists = false;
   public unknownSkillsExists = false;
 
-  constructor(private biosService: BiosService) {}
+  public firstName = '';
+
+  constructor(private biosService: BiosService, private router: Router) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
@@ -31,6 +34,17 @@ export class UserComponent {
       .subscribe((x) => {
         this.bioResponse = x;
         this.setSkillsProficiency();
+        this.firstName = this.bioResponse.person.name.split(' ')[0];
+        this.bioResponse.strengths.forEach((x) => {
+          x.recommendationsMessage =
+            x.recommendations > 0
+              ? `${
+                  x.recommendations > 1
+                    ? `${x.recommendations} recommendation for this skill`
+                    : `1 recommendation for this skill`
+                }`
+              : '';
+        });
       });
   }
 
@@ -58,5 +72,14 @@ export class UserComponent {
     this.unknownSkillsExists = this.bioResponse.strengths.some(
       (x: Strength) => x.proficiency === 'unknown'
     );
+  }
+
+  public navigateToDetails() {
+    const navigationExtras: NavigationExtras = {
+      state: {
+        ...this.bioResponse
+      },
+    };
+    this.router.navigate(['details'], navigationExtras);
   }
 }

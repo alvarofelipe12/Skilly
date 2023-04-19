@@ -103,6 +103,7 @@ export interface Strength {
   proficiency: string
   weight: number
   recommendations: number
+  recommendationsMessage: string
   media: any[]
   supra: boolean
   created: string

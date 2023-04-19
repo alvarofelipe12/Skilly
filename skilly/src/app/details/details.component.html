@@ -1,1 +1,13 @@
-<p>details works!</p>
+<div class="container mw-100">
+  <h2>Experience of {{firstName}}</h2>
+  <li *ngFor="let job of jobs">
+    <p>{{job.name}} {{job.fromMonth}}/{{job.fromYear}} - <ng-container
+        *ngIf="job.toMonth && job.toYear; else elseTemplate">
+        {{job.toMonth}}/{{job.toYear}}
+      </ng-container>
+      <ng-template #elseTemplate>
+        Current
+      </ng-template>
+    </p>
+  </li>
+</div>
