@@ -1,23 +1,62 @@
 import { Component } from '@angular/core';
 import { BiosService } from '../services/bios.service';
-// import { Bios } from '../interfaces/bios';
+import { Observable, Subject, takeUntil } from 'rxjs';
+import { Bios, Strength } from '../interfaces/bios';
 
 @Component({
   selector: 'app-user',
   templateUrl: './user.component.html',
-  styleUrls: ['./user.component.scss']
+  styleUrls: ['./user.component.scss'],
 })
 export class UserComponent {
+  public bioResponse: Bios;
 
-  public bioResponse: any;
+  public unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(
-    private biosService: BiosService
-  ) {}
+  public masterSkillsExists = false;
+  public expertSkillsExists = false;
+  public proficientSkillsExists = false;
+  public noviceSkillsExists = false;
+  public noExpSkillsExists = false;
+  public unknownSkillsExists = false;
+
+  constructor(private biosService: BiosService) {}
 
   ngOnInit(): void {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
-    this.bioResponse = this.biosService.getBios('alvarofelipe12');
+    this.biosService
+      .getBios('torrenegra')
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((x) => {
+        this.bioResponse = x;
+        this.setSkillsProficiency();
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribe$.next();
+    this.unsubscribe$.complete();
+  }
+
+  private setSkillsProficiency() {
+    this.masterSkillsExists = this.bioResponse.strengths.some(
+      (x: Strength) => x.proficiency === 'master'
+    );
+    this.expertSkillsExists = this.bioResponse.strengths.some(
+      (x: Strength) => x.proficiency === 'expert'
+    );
+    this.proficientSkillsExists = this.bioResponse.strengths.some(
+      (x: Strength) => x.proficiency === 'proficient'
+    );
+    this.noviceSkillsExists = this.bioResponse.strengths.some(
+      (x: Strength) => x.proficiency === 'novice'
+    );
+    this.noExpSkillsExists = this.bioResponse.strengths.some(
+      (x: Strength) => x.proficiency === 'no-experience-interested'
+    );
+    this.unknownSkillsExists = this.bioResponse.strengths.some(
+      (x: Strength) => x.proficiency === 'unknown'
+    );
   }
 }

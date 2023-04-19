@@ -4,13 +4,14 @@ import { Observable } from 'rxjs';
 import { Bios } from '../interfaces/bios';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class BiosService {
-
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   getBios(username: String): Observable<Bios> {
-    return this.http.get<Bios>(`https://bio.torre.co/api/bios/${username}`);
+    return this.http.get<Bios>(
+      `https://whispering-savannah-43434.herokuapp.com/user/${username}`
+    );
   }
 }

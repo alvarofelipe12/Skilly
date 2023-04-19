@@ -23,7 +23,8 @@ export class InterceptorService {
       setHeaders: {
         'Content-Type': 'application/json',
         'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS,DELETE,PUT',
+        'Access-Control-Allow-Methods': 'GET,POST,OPTIONS',
+        'Access-Control-Allow-Headers': 'X-Requested-With,content-type'
       },
     });
 
@@ -31,9 +32,9 @@ export class InterceptorService {
       tap({
         next: (event) => {
           if (event instanceof HttpResponse) {
-            // console.log('all looks good');
             // http response status code
             const responseHttpStatus = Number(event.status);
+            
             // verifying if there's a token error
             if (responseHttpStatus === 401) {
               console.error('auth-token error');

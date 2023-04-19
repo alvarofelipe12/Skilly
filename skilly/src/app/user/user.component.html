@@ -1,5 +1,74 @@
-<ng-container *ngIf="bioResponse | async">
-  <img [src]="bioResponse.person.picture" alt="">
+<ng-container *ngIf="bioResponse">
+  <div class="container mw-100">
+    <div class="row">
+      <div class="col-md-auto text-center">
+        <img [src]="bioResponse.person.picture" alt="" class="img-resize">
+        <p>{{bioResponse.person.name}}</p>
+      </div>
+      <div class="col">
+        <ng-container *ngIf="masterSkillsExists">
+          <p class="proficiency">Master</p>
+          <ng-container *ngFor="let skill of bioResponse.strengths">
+            <div class="col bullet" *ngIf="skill.proficiency === 'master'">
+              <p class="skill">
+                {{skill.name}}
+              </p>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="expertSkillsExists">
+          <p class="proficiency">Expert</p>
+          <ng-container *ngFor="let skill of bioResponse.strengths">
+            <div class="col bullet" *ngIf="skill.proficiency === 'expert'">
+              <p class="skill">
+                {{skill.name}}
+              </p>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="proficientSkillsExists">
+          <p class="proficiency">Proficient</p>
+          <ng-container *ngFor="let skill of bioResponse.strengths">
+            <div class="col bullet" *ngIf="skill.proficiency === 'proficient'">
+              <p class="skill">
+                {{skill.name}}
+              </p>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="noviceSkillsExists">
+          <p class="proficiency">Beginner</p>
+          <ng-container *ngFor="let skill of bioResponse.strengths">
+            <div class="col bullet" *ngIf="skill.proficiency === 'novice'">
+              <p class="skill">
+                {{skill.name}}
+              </p>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="noExpSkillsExists">
+          <p class="proficiency">No experience, but interested</p>
+          <ng-container *ngFor="let skill of bioResponse.strengths">
+            <div class="col bullet" *ngIf="skill.proficiency === 'no-experience-interested'">
+              <p class="skill">
+                {{skill.name}}
+              </p>
+            </div>
+          </ng-container>
+        </ng-container>
+        <ng-container *ngIf="unknownSkillsExists">
+          <p class="proficiency">Unknown</p>
+          <ng-container *ngFor="let skill of bioResponse.strengths">
+            <div class="col bullet" *ngIf="skill.proficiency === 'unknown'">
+              <p class="skill">
+                {{skill.name}}
+              </p>
+            </div>
+          </ng-container>
+        </ng-container>
 
+      </div>
+
+    </div>
+  </div>
 </ng-container>
-
