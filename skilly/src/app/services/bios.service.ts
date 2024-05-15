@@ -11,7 +11,7 @@ export class BiosService {
 
   getBios(username: String): Observable<Bios> {
     return this.http.get<Bios>(
-      `https://whispering-savannah-43434.herokuapp.com/user/${username}`
+      `https://skilly.vercel.app/user/${username}`
     );
   }
 }

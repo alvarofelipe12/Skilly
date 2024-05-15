@@ -29,7 +29,7 @@ export class UserComponent {
     //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
     //Add 'implements OnInit' to the class.
     this.biosService
-      .getBios('torrenegra')
+      .getBios('alvarofelipe12')
       .pipe(takeUntil(this.unsubscribe$))
       .subscribe((x) => {
         this.bioResponse = x;
