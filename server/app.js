@@ -7,7 +7,7 @@ const corsOptions = {
 };
 const app = express();
 app.use(cors(corsOptions));
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 3000;
 app.get('/user/:username', (req, res) => {
   console.log(req.params);
   if (req.params.username) {
